@@ -1,0 +1,3 @@
+[submodule "renpy"]
+	path = renpy
+	url = https://github.com/Grimiku/renpy
