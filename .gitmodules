@@ -1,0 +1,6 @@
+[submodule "pygame_sdl2"]
+	path = pygame_sdl2
+	url = https://github.com/Grimiku/pygame_sdl2
+[submodule "renpy-8"]
+	path = renpy-8
+	url = https://github.com/Grimiku/renpy-8
