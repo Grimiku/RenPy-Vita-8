@@ -86,6 +86,8 @@ PyMODINIT_FUNC PyInit_renpy_uguu_uguu(void);
 PyMODINIT_FUNC PyInit__renpybidi(void);
 
 char app_dir_path[0x100];
+char res_1080_path[0x100];
+char res_720_path[0x100];
 char app_gles_module_path[0x100];
 char app_program_path[0x100];
 char python_script_buffer[0x400];
@@ -123,14 +125,40 @@ int main(int argc, char* argv[])
 
     /* Generate full path to application directory and set relative paths */
     snprintf(app_dir_path, sizeof(app_dir_path), "ux0:app/%s", title_id);
+    snprintf(res_1080_path, sizeof(res_1080_path), "%s/1080", app_dir_path);
+    snprintf(res_720_path, sizeof(res_720_path), "%s/720", app_dir_path);
     snprintf(app_gles_module_path, sizeof(app_gles_module_path), "%s/module", app_dir_path);
     snprintf(app_program_path, sizeof(app_program_path), "%s/eboot.bin", app_dir_path);
 
-    /* Disable Back Touchpad to prevent "misclicks" */
-    SDL_setenv("VITA_DISABLE_TOUCH_BACK", "1", 1);
+    /* We might need the full juice*/
+    scePowerSetGpuClockFrequency(222);
 
-    /* We need to use some custom hints */
-    SDL_setenv("VITA_PVR_SKIP_INIT", "yeet", 1);
+    /* Check Custom Resolutions */
+    /* Alllow 1080i and 720p support on both PSTV and Vita if wanted (Needs Sharpscale) */
+    if (fd = sceIoOpen(res_1080_path, SCE_O_RDONLY, 0777) > 0) {
+        sceIoClose(fd);
+        override = SCE_TRUE;
+        /* This actually needs it for both systems,
+         * so just set it here for the vita */
+        SDL_setenv("VITA_RESOLUTION", "1080", 1);
+    }
+    else if (fd = sceIoOpen(res_720_path, SCE_O_RDONLY, 0777) > 0) {
+        sceIoClose(fd);
+        override = SCE_TRUE;
+        /* Vita doesn't really need it, but could help */
+        SDL_setenv("VITA_RESOLUTION", "720", 1);
+    }
+    /* At least Set 720p for PSTV and force 222MHz GPU since it's running on AC anyway */
+    if (vshSblAimgrIsDolce()) {
+        if (!override)
+            SDL_setenv("VITA_RESOLUTION", "720", 1);
+    }
+
+    /* SDL env vars and hints */
+    SDL_setenv("VITA_PVR_SKIP_INIT", "0", 1);
+
+    /*We don't need to disable back-touchpad here as this is implemented by
+    SDL_HINT_VITA_TOUCH_MOUSE_DEVICE default hint setting. At least as of time of writing this.*/
 
     /* Load Modules */
     sceKernelLoadStartModule("vs0:sys/external/libfios2.suprx", 0, NULL, 0, NULL, NULL);
@@ -230,6 +258,9 @@ int main(int argc, char* argv[])
     Py_SetPythonHome(python_home);
 
     Py_Initialize();
+
+    wchar_t* pyargs[] = { python_home, NULL };
+    PySys_SetArgvEx(1, pyargs, 1);
     
     snprintf(python_script_buffer, sizeof(python_script_buffer), "%s/renpy.py", app_dir_path);
 
