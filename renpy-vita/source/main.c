@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
     snprintf(app_gles_module_path, sizeof(app_gles_module_path), "%s/module", app_dir_path);
     snprintf(app_program_path, sizeof(app_program_path), "%s/eboot.bin", app_dir_path);
 
-    /* We might need the full juice*/
+    /* We might need the full juice */
     scePowerSetGpuClockFrequency(222);
 
     /* Check Custom Resolutions */
@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
         /* Vita doesn't really need it, but could help */
         SDL_setenv("VITA_RESOLUTION", "720", 1);
     }
-    /* At least Set 720p for PSTV and force 222MHz GPU since it's running on AC anyway */
+    /* At least Set 720p for PSTV */
     if (vshSblAimgrIsDolce()) {
         if (!override)
             SDL_setenv("VITA_RESOLUTION", "720", 1);
