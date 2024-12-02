@@ -1,5 +1,11 @@
 #!/bin/bash
 
+rm -rf DistributionTool
+rm -rf include
+rm -rf tmp_build
+rm -rf build
+rm -rf source/module
+
 mkdir -p DistributionTool/lib
 mkdir -p tmp_build
 
