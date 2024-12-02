@@ -8,3 +8,16 @@ This repo presupposes that <ins>**you have your Ren'Py game already installed on
 2) Open the app folder of your game on the Vita (ie. _ux0:app/BRBRB001/_) and delete everything apart from _game/_ and _sce_sys/_ folders;
 3) Unpack everything from the .zip from step 1) into the folder from step 2);
 4) Proceed to run the game as you normally would by selecting it from LiveArea.
+
+## Build instructions for some crazy people who want to build this, ignore otherwise
+One of the many things I learned during the update process for this particual port is that every build instruction becomes outdated extremely fast. Another thing is that vast majority of the build process boils down to work outside of the main repo (ie. VITASDK setup, SDL2 setup, other dependencies). That's why below are just major points to look out for while maybe at a later stage more detailed steps will follow:
+
+* Requires linux enviroment or WSL on Windows;
+* Requires Python 3.11;
+* Works under Cython 0.29.37 but not >3.0;
+* Requires rsync for the bash script to work;
+* Requires SDL2 built with -DVIDEO_VITA_PVR=ON flag;
+* Requires a couple of additional modifications to CPython3.11 for Vita and additional libraries. You can take a look at [my fork](https://github.com/Grimiku/cpython-vita) and modify your vitasdk with it or just run your own stuff based on my commits there;
+* Requires modifying vitasdk freetype package to compile with harfbuzz (ie. remove -DFT_DISABLE_HARFBUZZ=TRUE flag in VITABUILD);
+* _all_in_one.bash_ will try to do all the work for you but expect it will throw errors;
+* Requires a lot of patience.
