@@ -61,6 +61,7 @@ target_link_libraries("${ELF}"
   avfilter
   swscale 
   avcodec
+  webpdemux
   webp
   ogg
   mpg123
@@ -96,8 +97,8 @@ target_link_libraries("${ELF}"
   ${OPENSSL_LIBRARIES}
   pthread
   intl
-  fribidi 
-  harfbuzz 
+  fribidi
+  harfbuzz
   gcc
   z
   m
@@ -109,5 +110,3 @@ vita_create_self("${SELF}"
   UNSAFE
   NOASLR
 )
-
-
