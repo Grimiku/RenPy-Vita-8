@@ -18,6 +18,6 @@ One of the many things I learned during the update process for this particual po
 * Requires rsync for the bash script to work;
 * Requires SDL2 built with -DVIDEO_VITA_PVR=ON flag;
 * Requires a couple of additional modifications to CPython3.11 for Vita and additional libraries. You can take a look at [my fork](https://github.com/Grimiku/cpython-vita) and modify your vitasdk with it or just run your own stuff based on my commits there;
-* Requires modifying vitasdk freetype package to compile with harfbuzz (ie. remove -DFT_DISABLE_HARFBUZZ=TRUE flag in VITABUILD);
+* Requires modifying vitasdk freetype package to compile with harfbuzz;
 * _all_in_one.bash_ will try to do all the work for you but expect it will throw errors;
 * Requires a lot of patience.
