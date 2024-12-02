@@ -17,6 +17,7 @@ One of the many things I learned during the update process for this particual po
 * Works under Cython 0.29.37 but not >3.0;
 * Requires rsync for the bash script to work;
 * Requires SDL2 built with -DVIDEO_VITA_PVR=ON flag;
+* Requires you make sure openssl-1.1.1 is recognized by your vitasdk during cmake;
 * Requires a couple of additional modifications to CPython3.11 for Vita and additional libraries. You can take a look at [my fork](https://github.com/Grimiku/cpython-vita) and modify your vitasdk with it or just run your own stuff based on my commits there;
 * Requires modifying vitasdk freetype package to compile with harfbuzz;
 * _all_in_one.bash_ will try to do all the work for you but expect it will throw errors;
