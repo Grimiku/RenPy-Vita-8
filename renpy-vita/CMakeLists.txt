@@ -63,6 +63,8 @@ target_link_libraries("${ELF}"
   avcodec
   webpdemux
   webp
+  vorbis
+  vorbisfile
   ogg
   mpg123
   FLAC

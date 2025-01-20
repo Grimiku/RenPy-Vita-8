@@ -75,6 +75,7 @@ PyMODINIT_FUNC PyInit_renpy_styledata_style_selected_hover_functions(void);
 PyMODINIT_FUNC PyInit_renpy_styledata_style_selected_idle_functions(void);
 PyMODINIT_FUNC PyInit_renpy_styledata_style_selected_insensitive_functions(void);
 PyMODINIT_FUNC PyInit_renpy_styledata_stylesets(void);
+PyMODINIT_FUNC PyInit_renpy_renpyvita(void);
 
 PyMODINIT_FUNC PyInit_renpy_text_ftfont(void);
 PyMODINIT_FUNC PyInit_renpy_text_hbfont(void);
@@ -246,6 +247,7 @@ int main(int argc, char* argv[])
         {"renpy.text.texwrap", PyInit_renpy_text_texwrap},
         {"renpy.uguu.gl", PyInit_renpy_uguu_gl},
         {"renpy.uguu.uguu", PyInit_renpy_uguu_uguu},
+        {"renpy.renpyvita", PyInit_renpy_renpyvita},
 
         {"_renpybidi", PyInit__renpybidi},
 
