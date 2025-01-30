@@ -9,7 +9,7 @@
 #include <psp2/io/fcntl.h>
 #include <psp2/kernel/processmgr.h>
 #include <psp2/vshbridge.h> 
-#include <gpu_es4/psp2_pvr_hint.h>
+#include <vitaGL.h>
 
 #define MAX_PATH 256
 
@@ -89,7 +89,6 @@ PyMODINIT_FUNC PyInit__renpybidi(void);
 char app_dir_path[0x100];
 char res_1080_path[0x100];
 char res_720_path[0x100];
-char app_gles_module_path[0x100];
 char app_program_path[0x100];
 char python_script_buffer[0x400];
 char title_id[0xA];
@@ -107,7 +106,6 @@ void show_error_and_exit(const char* message)
 
 int main(int argc, char* argv[])
 {
-    PVRSRV_PSP2_APPHINT hint;
     SceUID fd = -1;
     SceBool override = SCE_FALSE;
     char target_path[MAX_PATH];
@@ -126,9 +124,6 @@ int main(int argc, char* argv[])
 
     /* Generate full path to application directory and set relative paths */
     snprintf(app_dir_path, sizeof(app_dir_path), "ux0:app/%s", title_id);
-    snprintf(res_1080_path, sizeof(res_1080_path), "%s/1080", app_dir_path);
-    snprintf(res_720_path, sizeof(res_720_path), "%s/720", app_dir_path);
-    snprintf(app_gles_module_path, sizeof(app_gles_module_path), "%s/module", app_dir_path);
     snprintf(app_program_path, sizeof(app_program_path), "%s/eboot.bin", app_dir_path);
 
     /* We might need the full juice */
@@ -155,27 +150,12 @@ int main(int argc, char* argv[])
             SDL_setenv("VITA_RESOLUTION", "720", 1);
     }
 
-    /* SDL env vars and hints */
-    SDL_setenv("VITA_PVR_SKIP_INIT", "0", 1);
-
     /*We don't need to disable back-touchpad here as this is implemented by
     SDL_HINT_VITA_TOUCH_MOUSE_DEVICE default hint setting. At least as of time of writing this.*/
 
     /* Load Modules */
     sceKernelLoadStartModule("vs0:sys/external/libfios2.suprx", 0, NULL, 0, NULL, NULL);
     sceKernelLoadStartModule("vs0:sys/external/libc.suprx", 0, NULL, 0, NULL, NULL);
-    snprintf(target_path, MAX_PATH, "%s/%s", app_gles_module_path, "libgpu_es4_ext.suprx");
-    sceKernelLoadStartModule(target_path, 0, NULL, 0, NULL, NULL);
-    snprintf(target_path, MAX_PATH, "%s/%s", app_gles_module_path, "libIMGEGL.suprx");
-    sceKernelLoadStartModule(target_path, 0, NULL, 0, NULL, NULL);
-
-    /* Set PVR Hints */
-    PVRSRVInitializeAppHint(&hint);
-    snprintf(hint.szGLES2, MAX_PATH, "%s/%s", app_gles_module_path, "libGLESv2.suprx");
-    snprintf(hint.szWindowSystem, MAX_PATH, "%s/%s", app_gles_module_path, "libpvrPSP2_WSEGL.suprx");
-    hint.ui32SwTexOpCleanupDelay = 16000; // Set to 16 milliseconds to prevent a pool of unfreed memory
-    PVRSRVCreateVirtualAppHint(&hint);
-
 
     wchar_t *program = Py_DecodeLocale(app_program_path, NULL);
     Py_SetProgramName(program);

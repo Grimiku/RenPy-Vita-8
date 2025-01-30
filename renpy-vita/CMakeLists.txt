@@ -50,13 +50,6 @@ target_link_libraries("${ELF}"
   SDL2_ttf 
   SDL2_gfx 
   SDL2 
-  taihen_stub
-  libgpu_es4_ext_stub_weak
-  libIMGEGL_stub_weak
-  libGLESv2_stub_weak
-  SceAppMgr_stub
-  SceProcessmgr_stub
-  SceIme_stub_weak
   avformat
   avfilter
   swscale 
@@ -77,7 +70,19 @@ target_link_libraries("${ELF}"
   mpdec 
   jpeg 
   png 
-  bz2 
+  bz2
+  aom
+  vpx
+  ${SDL2_LIBRARIES}
+  vitaGL
+  vitashark
+  mathneon
+  SceAppMgr_stub
+  SceProcessmgr_stub
+  SceIme_stub_weak
+  SceShaccCgExt
+  SceShaccCg_stub
+  SceKernelDmacMgr_stub
   SceMotion_stub
   SceCommonDialog_stub
   SceHid_stub
@@ -95,7 +100,7 @@ target_link_libraries("${ELF}"
   SceSsl_stub
   SceVshBridge_stub
   SceSysmodule_stub
-  ${SDL2_LIBRARIES}
+  taihen_stub
   ${OPENSSL_LIBRARIES}
   pthread
   intl
