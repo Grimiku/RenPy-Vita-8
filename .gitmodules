@@ -1,6 +1,6 @@
 [submodule "renpy-8"]
     path = renpy-8
-    url = https://github.com/example/renpy-8.git
+    url = https://github.com/Grimiku/renpy-8.git
     branch = fix
 [submodule "pygame_sdl2"]
 	path = pygame_sdl2
