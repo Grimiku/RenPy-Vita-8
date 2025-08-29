@@ -1,2 +1,7 @@
 
 .vscode/settings.json
+renpy-vita/source/module
+renpy-vita/build
+renpy-vita/DistributionTool
+renpy-vita/include
+renpy-vita/tmp_build
