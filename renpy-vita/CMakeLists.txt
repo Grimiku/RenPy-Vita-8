@@ -4,7 +4,7 @@ set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "
 set(VITASDK_CMAKE_FILE "$ENV{VITASDK}/share/vita.cmake" CACHE PATH "VitaSDK CMake functions file")
 include("${VITASDK_CMAKE_FILE}" REQUIRED)
 
-project(Renpy LANGUAGES C)
+project(Renpy LANGUAGES C CXX)
 
 set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d ATTRIBUTE2=12")
 
@@ -75,6 +75,7 @@ target_link_libraries("${ELF}"
   vpx
   ${SDL2_LIBRARIES}
   vitaGL
+  stdc++
   vitashark
   mathneon
   SceAppMgr_stub
