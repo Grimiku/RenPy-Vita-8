@@ -1,8 +1,12 @@
 # RenPy-Vita-8
 This is an updated version of [SonicMastr's Ren'Py 7 Vita port](https://github.com/SonicMastr/renpy-vita/tree/main) that changes the underlying library from Python2.7 to Python3.11 and bumps the supported features from late 2021 up to end of 2024.
 
+As of v0.2.1 release, [VitaGL](https://github.com/Rinnegatamante/vitaGL) can be used as an alternative solution for OpenGL handling and there is a seperate release for it in the [release section](https://github.com/Grimiku/RenPy-Vita-8/releases). Please do check out the [vitagl branch](https://github.com/Grimiku/RenPy-Vita-8/tree/vitagl) for more details.
+
 ## Instructions for regular users
-This repo presupposes that <ins>**you have your Ren'Py game already installed on the Vita**</ins>. Please use the [Ren'Py PSVita Distribution Tool](https://github.com/SonicMastr/renpy-vita/releases/tag/v1.0) to create your VPK if you haven't done it yet and install your game before proceeding.
+This repo presupposes that you have your Ren'Py game already installed on the Vita. Please use the [Ren'Py PSVita Distribution Tool](https://github.com/SonicMastr/renpy-vita/releases/tag/v1.0) to create your VPK if you haven't done it yet and install your game before proceeding.
+
+**!!REMEMBER!!** Although below steps are exactly the same for each release, VitaGL version requires you to have **libshacccg.suprx** under _ur0:/data/_ directory on your Vita. If you don't have it there, follow the [guide linked under VitaGL repo](https://cimmerian.gitbook.io/vita-troubleshooting-guide/shader-compiler/extract-libshacccg.suprx).
 
 1) Go into [Release section of this repo](https://github.com/Grimiku/RenPy-Vita-8/releases/) and download the latest .zip archive (ie. _RenPy_Vita_8_v0.1.zip_);
 2) Open the app folder of your game on the Vita (ie. _ux0:app/BRBRB001/_) and delete everything apart from _game/_ and _sce_sys/_ folders;
